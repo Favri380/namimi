@@ -1,0 +1,37 @@
+/* ==========================================
+   MÓDULO DE CURSORES KIRBY 💖
+   ========================================== */
+
+/* 1. Cursor General (Flecha Rosa) */
+html, body {
+    /* La ruta empieza directo en assets porque están en la misma carpeta */
+    cursor: url('../assets/cursores/Kirby_Arrow.cur'), auto !important;
+}
+
+/* 2. Cursor de Interacción (Kirby Link / Espada) */
+.utility-item, 
+.music-player, 
+.song-item-btn,
+.kirby-button-confirm,
+.amor-button-confirm,
+button, 
+a,
+.suga-item {
+    cursor: url('../assets/cursores/Kirby_Link.cur'), pointer !important;
+}
+
+/* 3. Cursor de Texto (Kirby con barra) */
+p, span, h1, h2, h3, li, label, input[type="text"], textarea {
+    cursor: url('../assets/cursores/Kirby_Text.cur'), text !important;
+}
+
+/* 4. Cursor de Carga (Kirby Durmiendo GIF) */
+/* Veo que lo llamaste kirby_zzz.gif en tu carpeta */
+.is-waiting, .swal2-loading {
+    cursor: url('../assets/cursores/kirby_zzz.gif'), wait !important;
+}
+
+/* 5. Cursor de Prohibido */
+.disabled, :disabled, .swal2-cancel {
+    cursor: url('../assets/cursores/Kirby_unavail.cur'), not-allowed !important;
+}

@@ -1,0 +1,554 @@
+/* ==========================================
+   css/personajes/kirby.css
+   ESTILOS BASE PARA KIRBY (CLÁSICO) - ACTUALIZADO
+   ========================================== */
+
+.kirby-contenedor {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 30px auto;
+}
+
+@keyframes aparecerKirby {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* 1. LOS PIES (Detrás del cuerpo) */
+.kirby-pie {
+    position: absolute;
+    width: 65px;
+    height: 45px;
+    background: radial-gradient(circle at 30% 20%, #ff6b7e 0%, #da2c43 60%, #9e1426 100%);
+    border: 3px solid #000;
+    border-radius: 50%;
+    bottom: 15px;
+    z-index: 5;
+    opacity: 0;
+    animation: aparecerKirby 0.5s ease 0.6s forwards;
+    box-shadow: inset -4px -5px 8px rgba(100, 0, 0, 0.4);
+}
+.kirby-pie.izq { left: 20px; transform: rotate(-25deg); }
+.kirby-pie.der { right: 20px; transform: rotate(25deg); }
+
+/* 2. LOS BRAZOS (NUEVO - Detrás del cuerpo) */
+.kirby-mano {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    background: radial-gradient(circle at 30% 30%, #ffcbe1 0%, #ffb7c5 50%, #e6809c 100%);
+    border: 3px solid #000;
+    border-radius: 50%;
+    z-index: 8; /* Justo detrás del cuerpo */
+    opacity: 0;
+    animation: aparecerKirby 0.5s ease 0.6s forwards; /* Aparecen con los pies */
+    box-shadow: inset -3px -4px 6px rgba(200, 50, 100, 0.3);
+}
+.kirby-mano.izq {
+    left: 10px;
+    top: 80px; /* Ajusta la altura */
+}
+.kirby-mano.der {
+    right: 10px;
+    top: 80px; /* Ajusta la altura */
+}
+
+/* 3. EL CUERPO BASE (Rosa, al centro) */
+.kirby-cuerpo {
+    position: absolute;
+    width: 140px;
+    height: 130px;
+    background: radial-gradient(circle at 35% 30%, #ffcbe1 0%, #ffb7c5 40%, #e6809c 100%);
+    border-radius: 50%;
+    border: 4px solid #000;
+    top: 40px;
+    left: 30px;
+    z-index: 10;
+    animation: aparecerKirby 0.8s ease forwards;
+    box-shadow: inset -8px -10px 15px rgba(200, 50, 100, 0.3);
+}
+
+/* 4. LA CARA (Encima del cuerpo) */
+.kirby-cara {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    opacity: 0;
+    animation: aparecerKirby 0.5s ease 1s forwards;
+}
+
+/* Ojos */
+.kirby-ojo {
+    position: absolute;
+    width: 14px;
+    height: 34px;
+    background: linear-gradient(to bottom, #000 40%, #112d6b 80%, #2b5bc4 100%);
+    border-radius: 50%;
+    top: 72px;
+}
+.kirby-ojo::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 14px;
+    background: #fff;
+    border-radius: 50%;
+    top: 3px;
+    left: 4px;
+    box-shadow: 0 0 2px rgba(255,255,255,0.8);
+}
+.kirby-ojo.izq { left: 75px; }
+.kirby-ojo.der { right: 75px; }
+
+/* Mejillas */
+.kirby-mejilla {
+    position: absolute;
+    width: 24px;
+    height: 10px;
+    background: #ff5e80;
+    border-radius: 50%;
+    top: 100px;
+    opacity: 0.6;
+    filter: blur(1.5px);
+}
+.kirby-mejilla.izq { left: 55px; }
+.kirby-mejilla.der { right: 55px; }
+
+/* Boca Abierta (Boca "O" - ACTUALIZADO) */
+.kirby-boca {
+    position: absolute;
+    width: 15px; /* Más estrecha para que sea una O */
+    height: 20px; /* Más alta para que sea una O */
+    background: #870014; /* Fondo oscuro rojizo */
+    border: 3px solid #000;
+    border-radius: 50%; /* Ojo, la forma es un óvalo perfecto */
+    top: 105px; /* Ajusta la posición */
+    left: 92px; /* Centrada */
+    box-shadow: inset 0 6px 5px rgba(0,0,0,0.6);
+}
+.kirby-boca::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 6px;
+    background: #ff7d94;
+    border-radius: 50%;
+    bottom: 0px;
+    left: 2px;
+}
+
+/* Estilo del Popup */
+.kirby-popup-estilo {
+    border: 3px solid #ffb7c5 !important;
+    border-radius: 50px !important;
+    box-shadow: 0 0 20px rgba(255, 183, 197, 0.4) !important;
+}
+
+/* --- 🌟 WARP STAR (ESTRELLA) --- */
+.warp-star {
+    position: absolute;
+    width: 180px; height: 180px;
+    bottom: -20px; left: 10px;
+    z-index: 2; /* Por debajo de Kirby */
+    filter: drop-shadow(0 0 15px rgba(255, 234, 0, 0.8));
+    animation: flotarEstrella 2s ease-in-out infinite;
+    opacity: 0;
+    animation: aparecerKirby 0.8s ease 0.5s forwards, flotarEstrella 2s ease-in-out infinite 1.3s;
+}
+
+/* Cada punta de la estrella */
+.star-part {
+    position: absolute;
+    width: 0; height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 90px solid #ffea00; /* Amarillo brillante */
+    top: 50%; left: 50%;
+    transform-origin: center 30px;
+}
+
+.p1 { transform: translate(-50%, -50%) rotate(0deg); }
+.p2 { transform: translate(-50%, -50%) rotate(72deg); }
+.p3 { transform: translate(-50%, -50%) rotate(144deg); }
+.p4 { transform: translate(-50%, -50%) rotate(216deg); }
+.p5 { transform: translate(-50%, -50%) rotate(288deg); }
+
+/* Animación de flotar */
+@keyframes flotarEstrella {
+    0%, 100% { transform: translateY(0) rotate(5deg); }
+    50% { transform: translateY(-15px) rotate(-5deg); }
+}
+
+/* Ajuste para que Kirby parezca sentado */
+.warpstar .kirby-cuerpo {
+    transform: rotate(-10deg);
+    top: 30px;
+}
+
+.warpstar .kirby-mano.izq { transform: rotate(40deg); top: 60px; left: 5px; }
+.warpstar .kirby-mano.der { transform: rotate(-40deg); top: 60px; right: 5px; }
+
+.warpstar .kirby-boca {
+    width: 18px; height: 22px;
+    background: #da2c43;
+    border-radius: 50%;
+    border: 2px solid #000;
+}
+
+/* ==========================================
+   LINK KIRBY (ACCESORIOS) - CORREGIDO ✅
+   ========================================== */
+
+/* 1. EL GORRO VERDE (Subido para no tapar los ojos) */
+.link .kirby-gorro-link {
+    position: absolute;
+    width: 130px;
+    height: 70px;
+    background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+    border: 3px solid #000;
+    border-radius: 100px 100px 10px 10px;
+    top: -5px; /* ANTES: 15px. AHORA: Subido para liberar la cara */
+    left: 35px;
+    z-index: 15; /* Entre el cuerpo y la cara */
+    opacity: 0;
+    animation: aparecerKirby 0.5s ease 0.8s forwards;
+    box-shadow: inset -5px -5px 10px rgba(0,50,0,0.3);
+}
+
+/* Punta doblada del gorro */
+.link .kirby-gorro-link::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #2e7d32;
+    border-right: 4px solid #000;
+    border-bottom: 4px solid #000;
+    right: -10px;
+    top: 15px;
+    border-radius: 0 0 50px 0;
+    transform: rotate(25deg);
+}
+
+/* 2. LA ESPADA (Empuñada en la mano derecha) */
+.kirby-espada {
+    position: absolute;
+    right: 20px; 
+    top: 35px; 
+    transform: rotate(-190deg); 
+    z-index: 30; /* SUBIDO: Ahora está por encima de la mano (que tiene 28) */
+    opacity: 0;
+    animation: aparecerKirby 0.5s ease 1.2s forwards;
+}
+
+/* La Hoja de la Espada */
+.kirby-espada .hoja {
+    width: 14px;
+    height: 85px;
+    background: linear-gradient(to right, #eceff1, #bdc3c7, #95a5a6);
+    border: 3px solid #000;
+    border-radius: 4px 4px 0 0;
+}
+
+/* El Mango de la Espada (Debe coincidir con la mano) */
+.kirby-espada .mango {
+    width: 35px; /* Un poquito más ancho para que cubra bien la mano */
+    height: 12px;
+    background: linear-gradient(to bottom, #1e3799, #0c2461); 
+    border: 3px solid #000;
+    position: absolute;
+    bottom: -10px; 
+    left: -13px;
+    border-radius: 5px;
+}
+
+
+/* Ajuste de manos para Link (Parece que la empuña) */
+.link .kirby-mano.der {
+    top: 105px; /* Ajustado para que quede justo bajo el mango */
+    right: 12px; /* Centrada con el eje de la espada */
+    transform: rotate(-10deg);
+    z-index: 20; /* BAJADO: Ahora queda por detrás de la espada */
+    background: radial-gradient(circle at 30% 30%, #ffcbe1 0%, #ffb7c5 50%, #e6809c 100%);
+}
+
+.kirby-espada .mango::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #1e3799;
+    border: 3px solid #000;
+    bottom: -15px;
+    left: 10px;
+    border-radius: 50%;
+}
+
+/* ==========================================
+   MARIO KIRBY (VERSIÓN FINAL AJUSTADA) 🍄
+   ========================================== */
+
+/* 1. LA GORRA ROJA (Más compacta para que no tape todo) */
+.mario .kirby-gorra-mario {
+    position: absolute;
+    width: 130px; /* Reducido de 155px */
+    height: 60px;
+    background: radial-gradient(circle at 30% 30%, #ff5252, #da2c43);
+    border: 3px solid #000;
+    border-radius: 70px 70px 10px 10px;
+    top: 10px; /* Bajada un poco para que apoye mejor */
+    left: 35px;
+    z-index: 15;
+    opacity: 0;
+    animation: aparecerKirby 0.5s ease 0.8s forwards;
+    box-shadow: inset -5px -5px 10px rgba(100,0,0,0.4);
+}
+
+/* El logo de la "M" */
+.mario .logo-m {
+    position: absolute;
+    width: 32px; height: 32px;
+    background: #fff !important; /* Fondo blanco real */
+    border: 2px solid #000;
+    border-radius: 50%;
+    top: 4px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 18px; color: #da2c43;
+}
+
+/* Visera de la gorra */
+.mario .kirby-gorra-mario::after {
+    content: '';
+    position: absolute;
+    width: 90px;
+    height: 12px;
+    background: #b71c1c;
+    border: 3px solid #000;
+    bottom: -10px; left: 20px;
+    border-radius: 0 0 20px 20px;
+}
+
+/* 2. EL BIGOTE (Bajado y más redondeado) */
+.mario .kirby-cara::after {
+    content: '';
+    position: absolute;
+    width: 55px;
+    height: 15px;
+    background: #000;
+    border-radius: 50px; /* Forma de óvalo */
+    top: 105px; /* BAJADO: Ahora queda justo bajo los ojos */
+    left: 74px;
+    z-index: 22;
+    opacity: 0;
+    animation: aparecerKirby 0.5s ease 1s forwards;
+}
+
+/* 3. LA BOCA (Bajada para que no se choque con el bigote) */
+.mario .kirby-boca {
+    top: 120px !important; /* BAJADO: Antes estaba en 105px */
+    background: #000 !important;
+    box-shadow: none !important;
+}
+.mario .kirby-boca::after { content: none !important; }
+
+/* 4. GUANTES Y ZAPATOS (Se mantienen) */
+.mario .kirby-mano { background: radial-gradient(circle at 30% 30%, #fff, #ddd) !important; border: 3px solid #000; }
+.mario .kirby-pie { background: radial-gradient(circle at 30% 20%, #795548 0%, #5d4037 60%, #3e2723 100%) !important; box-shadow: inset -4px -5px 8px rgba(0, 0, 0, 0.5); }
+
+/* ==========================================
+   SLEEPY KIRBY (VERSIÓN FINAL) 💤
+   ========================================== */
+
+/* 1. EL GORRO */
+.sleepy .kirby-gorro-sleepy {
+    position: absolute;
+    width: 130px; height: 70px;
+    background-color: #9c27b0;
+    border: 3px solid #000;
+    border-radius: 100px 100px 20px 20px;
+    top: 5px; left: 35px;
+    z-index: 15;
+    opacity: 0;
+    animation: aparecerKirby 0.8s ease 0.8s forwards;
+    background-image: radial-gradient(#ffea00 15%, transparent 20%), linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+    background-size: 35px 35px;
+    box-shadow: inset -5px -5px 15px rgba(50,0,80,0.4);
+}
+.sleepy .pompon {
+    position: absolute;
+    width: 35px; height: 35px;
+    background: radial-gradient(circle at 30% 30%, #fff, #ddd); border: 3px solid #000;
+    border-radius: 50%; right: -15px; top: 40px;
+    box-shadow: inset -2px -2px 5px rgba(0,0,0,0.2);
+}
+
+/* 2. OJOS (Paréntesis curvos - VERSIÓN UNIFICADA) */
+.sleepy .kirby-ojo {
+    width: 15px !important;
+    height: 10px !important;
+    background: transparent !important;
+    border: none !important;
+    border-top: 3px solid #000 !important; /* Solo el borde de arriba */
+    border-radius: 50% 50% 0 0 !important;
+    top: 88px !important; /* Bajados un poquito */
+    transform: rotate(0deg) !important;
+}
+.sleepy .kirby-ojo.izq { left: 72px; }
+.sleepy .kirby-ojo.der { right: 72px; }
+.sleepy .kirby-ojo::after { content: none !important; }
+
+/* 3. BOCA Y MANOS */
+.sleepy .kirby-boca { width: 8px; height: 8px; top: 110px; left: 96px; background: #000 !important; box-shadow: none !important; }
+.sleepy .kirby-boca::after { content: none !important; }
+.sleepy .kirby-mano.izq { transform: rotate(-20deg); top: 90px; }
+.sleepy .kirby-mano.der { transform: rotate(20deg); top: 90px; }
+
+/* 4. LAS Zzz (Capa superior) */
+.zzz-wrapper {
+    position: absolute;
+    top: -20px;   /* Subido para que salgan desde arriba del gorro */
+    right: 30px;  /* Ajustado a la derecha */
+    z-index: 100; 
+    display: flex; 
+    flex-direction: column;
+}
+.zzz-wrapper span {
+    color: #4dd0e1;
+    font-family: 'Arial Black', sans-serif;
+    font-weight: bold;
+    opacity: 0;
+    text-shadow: 0 0 8px rgba(77, 208, 225, 0.9);
+    animation: flotarZ 3s infinite;
+}
+.z1 { font-size: 14px; animation-delay: 0s !important; }
+.z2 { font-size: 22px; animation-delay: 0.6s !important; }
+.z3 { font-size: 32px; animation-delay: 1.2s !important; }
+
+@keyframes flotarZ {
+    0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translate(40px, -80px) scale(1.3); opacity: 0; }
+}
+
+/* ==========================================
+   SPIDER-KIRBY (ACCESORIOS Y TRAJE) - RESCATADO ✅
+   ========================================== */
+
+/* 1. EL TRAJE CON TELARAÑAS ✅ (Base tuya mejorada) */
+.spiderman .kirby-cuerpo {
+    background: #e62429 !important; /* Rojo Spiderman */
+    /* DIBUJAMOS LA TELARAÑA SOBRE EL CUERPO */
+    background-image: 
+        repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(0,0,0,0.15) 20px),
+        repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(0,0,0,0.15) 20px),
+        radial-gradient(circle at center, transparent 40px, rgba(0,0,0,0.1) 41px, transparent 42px);
+    z-index: 10;
+}
+
+/* ==========================================
+   SPIDER-KIRBY (VERSIÓN LIMPIA Y BLINDADA) 🕸️✅
+   ========================================== */
+
+/* 1. EL CUERPO (Rojo Liso - Sin líneas borrosas) */
+.spiderman .kirby-cuerpo {
+    background: #e62429 !important; /* Rojo Spiderman */
+    /* ELIMINADO: background-image de telaraña (quedaba mal) */
+    background-image: none !important;
+}
+
+/* 2. LOS OJOS DE SPIDERMAN ✅ (TUS OJOS EXACTOS) */
+.spiderman .kirby-ojo {
+    width: 32px !important;    
+    height: 42px !important;   
+    background: radial-gradient(circle at 40% 40%, #fff, #e0e0e0) !important;
+    border: 4px solid #000 !important; /* Borde más grueso para que resalte */
+    top: 65px !important;
+    z-index: 25;
+    /* La clave: arriba casi recto, abajo muy curvo */
+    border-radius: 10% 80% 20% 50% !important; 
+    opacity: 0;
+    animation: aparecerKirby 0.5s ease 0.8s forwards;
+}
+
+/* Ajuste de posición individual y rotación (TUS VALORES EXACTOS ✅) */
+.spiderman .kirby-ojo.izq { 
+    left: 60px; 
+    transform: rotate(-70deg) skewX(10deg) !important; /* Rotación positiva para que la punta suba al centro */
+    border-radius: 80% 10% 50% 20% !important; /* Espejado */
+}
+.spiderman .kirby-ojo.der { 
+    right: 60px; 
+    transform: rotate(70deg) skewX(-10deg) !important; 
+    /* Rotación negativa para que la punta suba al centro */
+}
+
+/* Limpieza de brillos y mejillas */
+.spiderman .kirby-ojo::after,
+.spiderman .kirby-mejilla {
+    content: none !important;
+    display: none !important;
+}
+
+/* 3. LOS PIES Y MANOS (Azules y Rojos) */
+.spiderman .kirby-pie { background: radial-gradient(circle at 30% 20%, #1e88e5 0%, #0046ad 60%, #00225c 100%) !important; box-shadow: inset -4px -5px 8px rgba(0, 0, 0, 0.5) !important; }
+.spiderman .kirby-mano { background: radial-gradient(circle at 30% 30%, #ff5252 0%, #e62429 50%, #b71c1c 100%) !important; box-shadow: inset -3px -4px 6px rgba(100, 0, 0, 0.5) !important; }
+
+/* 4. LA TELARAÑA QUE CUELGA ✅ (Un toque más nítida) */
+.spiderman .spider-web {
+    position: absolute;
+    width: 120px; /* Un toque más grande */
+    height: 120px;
+    background: transparent;
+    border-radius: 50%;
+    /* DIBUJAMOS UNA TELARAÑA NÍTIDA CON GRADIENTES RADIALES */
+    background-image: 
+        radial-gradient(transparent 35%, #fff 36%, #fff 38%, transparent 39%),
+        radial-gradient(transparent 55%, #fff 56%, #fff 58%, transparent 59%);
+    background-size: 60px 60px;
+    top: -25px; /* Subida para que no tape la cara */
+    left: 10px;
+    z-index: 2; /* Por debajo de Kirby */
+    opacity: 0;
+    animation: aparecerKirby 0.5s ease 1s forwards;
+}
+
+/* 1. EL TRAJE CON LÍNEAS NEGRAS ✅ */
+/* 1. EL TRAJE CON LÍNEAS (VERSIÓN COMBINADA) ✅ */
+.spiderman .kirby-cuerpo {
+    /* IMPORTANTE: Quitamos el background-color separado y lo unimos todo */
+    background: #e62429 !important; 
+    
+    /* Fusionamos los gradientes en una sola propiedad */
+    background-image: 
+        linear-gradient(90deg, rgba(0, 0, 0, 0.25) 1px, transparent 15px),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.25) 1px, transparent 15px),
+        radial-gradient(circle at 35% 30%, rgba(255,255,255,0.3) 0%, transparent 60%) !important;
+        
+    
+    background-size: 20px 20px, 20px 20px, 100% 100% !important;
+    background-position: center !important;
+    
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset -8px -10px 15px rgba(100, 0, 0, 0.6) !important;
+}
+
+/* 2. LA ARAÑA DEL PECHO (Versión simplificada y nítida) */
+/* Usamos el ::after del cuerpo para que quede pegado al pecho */
+.spiderman .kirby-cuerpo::after {
+    content: '🕷️'; /* Usamos un emoji de araña para que sea perfecto y no se deforme */
+    position: absolute;
+    top: 84px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    filter: grayscale(1) brightness(0); /* La forzamos a ser negra sólida */
+    z-index: 20;
+    opacity: 0.8;
+}

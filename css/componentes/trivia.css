@@ -1,0 +1,648 @@
+/* ==========================================
+   1. CONFIGURACIÓN GENERAL Y FUENTES
+   ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Montserrat:wght@900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #05050a;
+    font-family: 'Rajdhani', sans-serif;
+    color: white;
+}
+
+/* ==========================================
+   2. CONTENEDOR ARCADE (MENÚ PRINCIPAL)
+   ========================================== */
+.arcade-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.arcade-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 3.5rem;
+    color: #fff;
+    text-shadow: 0 0 20px #8a2be2;
+    margin-bottom: 10px;
+    letter-spacing: 8px;
+}
+
+.arcade-title span { 
+    color: #ffea00 !important; 
+    text-shadow: 0 0 20px #ffea00 !important; 
+}
+
+.arcade-subtitle {
+    color: #a485ff;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Grilla de Modos */
+.game-modes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 10px;
+    max-height: 75vh;
+    overflow-y: auto;
+}
+
+/* Scrollbar Gamer */
+.game-modes-grid::-webkit-scrollbar { width: 8px; }
+.game-modes-grid::-webkit-scrollbar-thumb {
+    background: linear-gradient(#bd00ff, #00ffcc);
+    border-radius: 10px;
+}
+
+/* ==========================================
+   3. TARJETAS DE MODO (NEÓN SYSTEM)
+   ========================================== */
+.mode-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 30px;
+    padding: 35px 20px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid transparent;
+}
+
+.mode-card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+.mode-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+}
+
+.mode-name {
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.6rem;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.mode-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #000;
+}
+
+/* GRUPOS DE COLORES NEÓN */
+.neon-aqua { border-color: #00ffcc !important; box-shadow: 0 0 15px rgba(0, 255, 204, 0.2); }
+.neon-aqua .mode-badge { background: #00ffcc; }
+.neon-aqua:hover { box-shadow: 0 0 30px rgba(0, 255, 204, 0.5); }
+
+.neon-purple { border-color: #bd00ff !important; box-shadow: 0 0 15px rgba(189, 0, 255, 0.2); }
+.neon-purple .mode-badge { background: #bd00ff; color: #fff; }
+.neon-purple:hover { box-shadow: 0 0 30px rgba(189, 0, 255, 0.5); }
+
+.neon-magenta { border-color: #ff007a !important; box-shadow: 0 0 15px rgba(255, 0, 122, 0.2); }
+.neon-magenta .mode-badge { background: #ff007a; color: #fff; }
+.neon-magenta:hover { box-shadow: 0 0 30px rgba(255, 0, 122, 0.5); }
+
+.neon-gold { border-color: #ffea00 !important; box-shadow: 0 0 15px rgba(255, 234, 0, 0.2); }
+.neon-gold .mode-badge { background: #ffea00; }
+.neon-gold:hover { box-shadow: 0 0 30px rgba(255, 234, 0, 0.5); }
+
+/* ==========================================
+   4. ELEMENTOS INTERNOS DEL JUEGO (HUD)
+   ========================================== */
+.game-hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+}
+
+.game-hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--accent-color, rgba(255, 255, 255, 0.2));
+    border-radius: 15px;
+    box-shadow: 0 0 15px var(--accent-low, rgba(0,0,0,0.3));
+}
+
+.score-digital {
+    color: #ffea00;
+    text-shadow: 0 0 10px #ffea00;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.hearts { font-size: 1.5rem; }
+
+.game-exit-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.game-exit-btn:hover {
+    color: var(--accent-color, #ffea00);
+    transform: scale(1.1);
+}
+
+.blur-hint {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.pregunta-container {
+    padding: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.img-box {
+    position: relative;
+    border: 3px solid var(--accent-color, #8a2be2); /* Dynamic border color */
+    border-radius: 25px;
+    overflow: hidden;
+    margin: 15px 0;
+    background: #000;
+    padding: 15px; /* Add padding to create a frame effect */
+    box-shadow: 0 0 20px var(--accent-low, rgba(0,0,0,0.3)); /* Add glow */
+    background: var(--accent-low, rgba(0,0,0,0.2)); /* Subtle background */
+}
+
+.img-pregunta { width: 100%; height: auto; display: block; }
+
+/* Botones de Opción */
+.options-grid { display: flex; flex-direction: column; gap: 12px; }
+.options-grid.disabled { pointer-events: none; }
+
+.btn-option {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 18px;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.btn-option:hover {
+    border-color: var(--accent-color, #ffea00);
+    background: var(--accent-low, rgba(255, 234, 0, 0.1));
+}
+
+/* Feedback Colors */
+.correct { background: #00ff88 !important; color: #000 !important; border-color: #00ff88 !important; box-shadow: 0 0 20px #00ff88; }
+.wrong { background: #ff2e63 !important; color: #fff !important; border-color: #ff2e63 !important; box-shadow: 0 0 20px #ff2e63; animation: shake 0.4s; }
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* Trivia Card (for general trivia questions) */
+.trivia-card {
+    border: 2px solid var(--accent-color, #bd00ff);
+    padding: 25px;
+    border-radius: 20px;
+    background: var(--accent-low, rgba(189, 0, 255, 0.1));
+    margin: 20px 0;
+    box-shadow: 0 0 15px var(--accent-low, rgba(0,0,0,0.2));
+}
+
+/* ==========================================
+   5. SELECTORES DE DIFICULTAD (POP-UPS)
+   ========================================== */
+.trivia-cyber-popup {
+    border-radius: 40px !important; /* Keep existing border-radius */
+    border: 2px solid var(--accent-color, #ff71f3) !important; /* Dynamic border color */
+    box-shadow: 0 0 30px var(--accent-low, rgba(255, 255, 255, 0.4)) !important; /* Dynamic shadow */
+}
+
+.btn-trivia-select, .btn-bias-select {
+    position: relative;
+    background: #151525;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    height: 85px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 2px solid rgba(255,255,255,0.05);
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.card-bg-image {
+    position: absolute;
+    width: 100%; height: 100%;
+    background-image: url('https://i.pinimg.com/736x/be/35/2c/be352c17d7e40180dbf9258c9d974067.jpg');
+    background-size: cover;
+    opacity: 0;
+    transition: 0.4s;
+    z-index: 1;
+}
+
+.btn-trivia-select:hover .card-bg-image, 
+.btn-bias-select:hover .card-bg-image { opacity: 0.25; }
+
+.card-content { 
+    position: relative; z-index: 2; 
+    pointer-events: none; 
+    display: flex; align-items: center; padding-left: 20px; 
+}
+
+/* ==========================================
+   6. PANTALLAS FINALES Y COMPONENTES
+   ========================================= */
+.arcade-end-popup { border-radius: 30px !important; border: 2px solid var(--accent-color, #8a2be2) !important; box-shadow: 0 0 20px var(--accent-low, rgba(0,0,0,0.3)); }
+.end-game-container { padding: 20px; text-align: center; }
+.digital-score { font-size: 3.5rem; color: #ffea00; text-shadow: 0 0 15px #ffea00; margin: 15px 0; }
+
+/* Leaderboard */
+.leaderboard-container {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--accent-color, rgba(255, 255, 255, 0.2));
+    border-radius: 15px;
+    padding: 15px;
+    margin: 20px auto;
+    max-width: 300px;
+    box-shadow: 0 0 15px var(--accent-low, rgba(0,0,0,0.3));
+}
+
+.leaderboard-title {
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.leaderboard-entry {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+.leaderboard-entry:last-child { border-bottom: none; }
+.leaderboard-entry .leaderboard-name { color: #fff; font-weight: 600; }
+.leaderboard-entry .leaderboard-score { color: var(--accent-color, #ffea00); font-family: 'Courier New', monospace; font-weight: bold; }
+.leaderboard-entry.player-entry .leaderboard-name { color: var(--accent-color, #a485ff); }
+
+.leaderboard-high-score {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    margin-top: 15px;
+}
+.digital-score-small {
+    color: var(--accent-color, #ffea00);
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
+
+.btn-arcade {
+    width: 100%; max-width: 280px; padding: 16px; margin: 10px auto;
+    border-radius: 50px; border: none; font-weight: bold;
+    text-transform: uppercase; cursor: pointer; transition: 0.3s;
+    background: linear-gradient(90deg, #8a2be2, #ff00c8);
+    color: white;
+}
+
+.btn-arcade:hover { transform: scale(1.05); filter: brightness(1.2); }
+
+.lyrics-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid #bd00ff;
+    border-radius: 20px;
+    padding: 30px 15px;
+    margin-bottom: 20px;
+}
+
+.lyrics-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.4;
+    color: #fff;
+}
+
+/* ==========================================
+   NUEVO LAYOUT INMERSIVO (VÍVIDA)
+   ========================================== */
+
+/* Ajustes de Title y Subtitle para este modo */
+.arcade-container.immersive-layout .arcade-title {
+    font-size: 3rem;
+    letter-spacing: 5px;
+    margin-bottom: 5px;
+}
+
+.arcade-container.immersive-layout .arcade-subtitle {
+    margin-bottom: 30px;
+    color: rgba(164, 133, 255, 0.7);
+}
+
+/* El contenedor de la lista vertical */
+.immersive-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 95%; /* Un poquito menos del 100 para dar aire a los costados */
+    max-width: 1000px;
+    margin: 0 auto;
+    max-height: 70vh;
+    padding: 20px; /* Padding para que el brillo del hover no se corte */
+    
+    /* ESTO ELIMINA LA BARRA HORIZONTAL */
+    overflow-x: hidden !important; 
+    overflow-y: auto; /* Mantiene la vertical si hay muchos juegos */
+}
+.immersive-list-wrapper::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* EL RECTÁNGULO VÍVIDA (Base) */
+.mode-item {
+    position: relative;
+    background: #111122; /* Fondo muy oscuro por defecto */
+    border-radius: 50px; /* Terminaciones circulares como pediste */
+    height: 75px; /* Altura fija para la simetría */
+    display: flex;
+    align-items: center;
+    cursor: pointer !important;
+    border: 2px solid transparent; /* Para el neón al pasar mouse */
+    overflow: hidden; /* Importante para el efecto de fondo */
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* LA FOTO DE FONDO (Inmersiva) */
+.item-bg-vivida {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0; /* Empieza invisible */
+    transition: opacity 0.5s ease;
+    z-index: 1; /* Por debajo del texto */
+}
+
+/* EFECTOS DE HOVER (Magia) */
+.mode-item:hover {
+    transform: scale(1.02); /* Pequeño pulso */
+}
+
+.mode-item:hover .item-bg-vivida {
+    opacity: 0.35; /* Aparece tenue la foto de Pinterest al pasar mouse */
+}
+
+/* Contenido sobre la foto */
+.item-content-wrapper {
+    position: relative;
+    z-index: 2; /* Por encima de la foto */
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0 25px; /* Espacio interno */
+    gap: 20px;
+    pointer-events: none; /* El click pasa al .mode-item */
+}
+
+/* Iconos mini pero nítidos */
+.mode-icon-mini {
+    font-size: 2.2rem;
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));
+}
+
+.text-group {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.mode-name-vivida {
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.mode-desc-vivida {
+    color: #999;
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+/* SISTEMA DE COLORES NEÓN (Hover) */
+.mode-item.neon-aqua:hover { border-color: #00ffcc; box-shadow: 0 0 25px rgba(0, 255, 204, 0.3); }
+.mode-item.neon-purple:hover { border-color: #bd00ff; box-shadow: 0 0 25px rgba(189, 0, 255, 0.3); }
+.mode-item.neon-magenta:hover { border-color: #ff007a; box-shadow: 0 0 25px rgba(255, 0, 122, 0.3); }
+.mode-item.neon-gold:hover { border-color: #ffea00; box-shadow: 0 0 25px rgba(255, 234, 0, 0.3); }
+/* ==========================================
+   VERSION VÍVIDA XL (MÁS GRANDE)
+   ========================================== */
+
+/* 1. Hacemos que la lista sea más ancha */
+.immersive-list-wrapper {
+    max-width: 900 !important; /* De 800px a 1000px */
+    gap: 15px !important; /* Más espacio entre rectángulos */
+}
+
+/* 2. Rectángulos más altos y espaciosos */
+.mode-item {
+    height: 99px !important; /* De 75px a 100px */
+    border-radius: 58px !important; /* Más curvos todavía */
+    border-width: 3px !important; /* Borde neón más grueso */
+}
+
+/* 3. Iconos más imponentes */
+.mode-icon-mini {
+    font-size: 3rem !important; /* De 2.2 a 3.0 */
+    margin-right: 10px;
+}
+
+/* 4. Textos más legibles y grandes */
+.mode-name-vivida {
+    font-size: 1.8rem !important; /* Título bien grande */
+    letter-spacing: 3px !important;
+}
+
+.mode-desc-vivida {
+    font-size: 1rem !important; /* Descripción que se lea bien */
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* 5. Ajuste del Título Principal */
+.arcade-container.immersive-layout .arcade-title {
+    font-size: 4.5rem !important; /* Bangtan Arcade Gigante */
+    margin-top: 20px;
+}
+
+.arcade-container.immersive-layout .arcade-subtitle {
+    font-size: 1.4rem !important;
+    margin-bottom: 40px;
+}
+
+/* 6. Animación de brillo al pasar el mouse (Glow más fuerte) */
+.mode-item:hover {
+    transform: scale(1.03) translateY(-3px) !important;
+    box-shadow: 0 0 40px rgba(189, 0, 255, 0.4) !important; /* Glow aumentado */
+}
+
+#easter-egg-trigger:hover {
+    color: #fff !important;
+    text-shadow: 0 0 30px #ffea00, 0 0 60px #ffea00 !important;
+    transform: scale(1.2);
+    display: inline-block;
+}
+
+.easter-egg-title-vivida {
+    color: #fff !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 3.5rem !important; /* Bien grande */
+    font-weight: 900 !important;
+    text-shadow: 0 0 20px #8a2be2, 0 0 40px #bd00ff, 0 0 60px #ffea00 !important;
+    letter-spacing: 5px;
+    margin-top: 20vh !important; /* Lo baja un poco del borde superior */
+}
+
+/* ==========================================
+   FIX SELECTORES DE DIFICULTAD (POP-UPS)
+   ========================================== */
+
+/* Contenedor interno del SweetAlert */
+.trivia-wrapper {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* El título dentro de la ventanita */
+.trivia-main-title {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 900 !important;
+    font-size: 1.8rem !important;
+    color: #fff !important;
+    margin-bottom: 20px !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.trivia-main-title span { color: #ffea00; }
+
+/* RE-ESTILIZADO DE LAS TARJETAS (Botones) */
+.btn-bias-select, .btn-trivia-select {
+    position: relative;
+    background: #151525;
+    border-radius: 20px;
+    height: 90px; /* Un poco más altas para que luzcan */
+    display: flex;
+    align-items: center;
+    cursor: pointer !important;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    padding: 0 !important; /* Reset de SweetAlert */
+}
+
+/* La imagen de fondo (El truco de la opacidad) */
+.btn-bias-select .card-bg-image, 
+.btn-trivia-select .card-bg-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15; /* Súper tenue por defecto */
+    transition: 0.4s;
+    z-index: 1;
+}
+
+/* Hover: Se ilumina la foto y el borde */
+.btn-bias-select:hover .card-bg-image, 
+.btn-trivia-select:hover .card-bg-image {
+    opacity: 0.4;
+}
+
+/* Contenido sobre la foto */
+.card-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    width: 100%;
+    pointer-events: none;
+}
+
+.card-emoji {
+    font-size: 35px;
+    margin-right: 20px;
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
+}
+
+.card-texts {
+    text-align: left;
+}
+
+.card-texts strong {
+    display: block;
+    color: #fff;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.card-texts p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* COLORES NEÓN POR DIFICULTAD */
+.btn-bias-select.easy:hover, .btn-trivia-select.easy:hover { border-color: #00ffcc; box-shadow: 0 0 15px rgba(0, 255, 204, 0.4); }
+.btn-bias-select.medium:hover, .btn-trivia-select.medium:hover { border-color: #bd00ff; box-shadow: 0 0 15px rgba(189, 0, 255, 0.4); }
+.btn-bias-select.hard:hover, .btn-trivia-select.hard:hover { border-color: #ff007a; box-shadow: 0 0 15px rgba(255, 0, 122, 0.4); }

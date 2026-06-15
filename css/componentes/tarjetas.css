@@ -1,0 +1,172 @@
+/* css/componentes/tarjetas.css */
+
+/* --- Estilos base de la Tarjeta --- */
+.menu-card {
+    border-radius: 40px; 
+    padding: 40px;       
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    background: rgba(13, 13, 26, 0.7); 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Alinea contenido arriba y botón abajo */
+    text-decoration: none;
+    color: white;
+    z-index: 1;
+}
+
+/* Efecto de luz al pasar el mouse */
+.menu-card::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -100%;
+    width: 200%; height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+    transform: rotate(45deg);
+    transition: 0.6s;
+    z-index: 2;
+}
+
+.menu-card:hover::after {
+    left: 100%;
+}
+
+.menu-card:hover {
+    transform: translateY(-15px);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Imagen de fondo opaca */
+.menu-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    opacity: 0.4;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    transition: all 0.5s ease;
+}
+
+.menu-card:hover::before { 
+    opacity: 0.6; 
+    transform: scale(1.1);
+} 
+
+/* --- COLORES DE BORDES POR TARJETA --- */
+.card-1 { border: 3px solid rgba(161, 83, 233, 0.8); }
+.card-1::before { background-image: url('https://i.pinimg.com/736x/0a/c8/d6/0ac8d6614d140325525c56458cfd96cc.jpg'); }
+
+.card-2 { border: 3px solid rgba(194, 194, 143, 0.6) !important; }
+.card-2::before { background-image: url('https://i.pinimg.com/736x/00/4a/89/004a896cd22ba863d933be6c16c7a7c9.jpg'); }
+
+.card-3 { border: 3px solid rgba(47, 109, 224, 0.8) !important; }
+.card-3::before { background-image: url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=500'); }
+
+.card-4 { border: 3px solid rgba(255, 234, 0, 0.4); }
+.card-4::before { background-image: url('https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&q=80&w=500'); }
+
+.card-5 { border: 3px solid rgba(255, 250, 250, 0.4); }
+.card-5::before { background-image: url('https://i.pinimg.com/736x/12/4c/b0/124cb090b7351f5cf1e82b51e9d1479a.jpg'); } 
+
+.card-6 { border: 3px solid rgba(240, 107, 220, 0.8) !important; }
+.card-6::before { background-image: url('https://i.pinimg.com/736x/d2/50/57/d250579682845db269b080a0dbf77137.jpg'); }
+
+/* --- CONTENIDO INTERNO --- */
+.card-icon {
+    font-size: 3.5rem; 
+    color: #ffea00;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px rgba(255, 234, 0, 0.3));
+}
+
+.card-title {
+    font-size: 2.2rem; 
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+/* EL BOTÓN UNIFICADO (Glassmorphism) */
+.btn-custom,
+.menu-card button,
+.menu-card .btn {
+    all: unset !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    
+    width: 85% !important;
+    margin: 20px auto 0 auto !important;
+    padding: 12px 15px !important;
+    
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 50px !important;
+    
+    color: #ffffff !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    
+    cursor: pointer !important;
+    transition: all 0.4s ease !important;
+    text-decoration: none !important;
+    box-sizing: border-box !important;
+}
+
+.btn-custom:hover,
+.menu-card button:hover,
+.menu-card .btn:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: #ffea00 !important;
+    box-shadow: 0 0 20px rgba(255, 234, 0, 0.4) !important;
+    transform: translateY(-3px) !important;
+    color: #ffea00 !important;
+}
+
+.btn-custom span,
+.menu-card button span,
+.menu-card .btn span {
+    margin-left: 8px;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.btn-custom:hover span,
+.menu-card button:hover span,
+.menu-card .btn:hover span {
+    transform: translateX(5px);
+}
+
+/* Esto mata cualquier degradado fucsia o azul de Bootstrap */
+.menu-card button, 
+.menu-card .btn {
+    background-image: none !important; 
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    outline: none !important;
+}
+
+/* Reafirmamos el estilo de vidrio para que no queden dudas */
+.btn-custom,
+.menu-card button,
+.menu-card .btn {
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}

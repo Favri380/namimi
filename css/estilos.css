@@ -1,0 +1,248 @@
+/* ==========================================
+   CONFIGURACIÓN GLOBAL Y VARIABLES
+   ========================================== */
+
+:root {
+    --bg-oscuro: #050509;
+    --texto-principal: #ffffff;
+    --texto-secundario: rgba(255, 255, 255, 0.7);
+    --amarillo-neon: #ffea00;
+    --morado-luxury: #8a2be2;
+}
+
+body {
+    background-color: #0b1122; 
+    color: white;
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    background-attachment: fixed;
+}
+
+/* ==========================================
+   HEADER: ESTILO DELICADO Y LUXURY
+   ========================================== */
+.luxury-header {
+    height: 35vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.aurora-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 50% -20%, rgba(26, 33, 68, 0.925), transparent 70%),
+                radial-gradient(circle at 10% 80%, rgba(60, 89, 112, 0.521), transparent 50%);
+    filter: blur(60px);
+    opacity: 0.8;
+    z-index: 1;
+    animation: auroraFlow 15s ease-in-out infinite alternate;
+}
+
+.header-content-v2 {
+    z-index: 10;
+    position: relative;
+    width: 85%;
+    max-width: 1100px;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--accent-color, rgba(255, 255, 255, 0.25));
+    border-radius: 50px; /* Esquinas más suaves y modernas */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    animation: fadeInDown 1.2s ease-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+}
+
+/* Efecto de brillo que recorre el borde */
+.header-content-v2::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    transform: skewX(-25deg);
+    animation: shineHeader 8s infinite;
+}
+
+@keyframes shineHeader {
+    0% { left: -100%; }
+    20% { left: 200%; }
+    100% { left: 200%; }
+}
+
+.cyber-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700; /* Un poco menos pesado para más elegancia */
+    font-size: 2.8rem;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    letter-spacing: 20px; /* Mucho aire entre letras */
+    margin: 0;
+    margin-left: 25px; /* Para compensar el espaciado final */
+    transition: all 0.8s ease;
+}
+
+.divider-v2 {
+    width: 100px;
+    height: 1px;
+    background: var(--accent-color, #fff);
+    margin: 20px auto;
+    opacity: 0.6;
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.cyber-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400; /* Aumentado para mejor visibilidad */
+    font-size: 0.9rem;
+    color: var(--accent-color, #fff);
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    margin: 0;
+    opacity: 0.9; /* Más visible */
+}
+
+/* ==========================================
+   CONTENIDO PRINCIPAL (TARJETAS)
+   ========================================== */
+.main-content {
+    background: rgba(47, 76, 82, 0.137);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--accent-color, rgba(255, 255, 255, 0.1));
+    border-radius: 60px;
+    padding: 60px 40px;
+    
+    /* Aumentamos el margen negativo para que suba más */
+    margin: -20px auto 100px auto !important; 
+    
+    width: 92%;
+    max-width: 1400px;
+    position: relative;
+    z-index: 20;
+    box-shadow: 0 -20px 50px rgba(0,0,0,0.5);
+}
+
+.main-content .container {
+    max-width: 100% !important;
+    display: flex;
+    justify-content: center;
+}
+
+.main-content .row {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* ==========================================
+   ANIMACIONES
+   ========================================== */
+@keyframes auroraFlow {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.1) translate(30px, -30px); }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================
+   REPRODUCTOR DE MÚSICA (FIX TOTAL)
+   ========================================== */
+.music-player {
+    position: fixed !important;
+    bottom: 25px; 
+    right: 25px;
+    width: 280px;
+    background: rgba(15, 15, 20, 0.98) !important;
+    backdrop-filter: blur(25px);
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    overflow: hidden;
+    transition: width 0.3s, height 0.3s;
+}
+
+.player-header {
+    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.03);
+    cursor: move;
+}
+
+.drag-icon, #minimizeBtn {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.8rem;
+}
+
+#player-img {
+    width: 60px; 
+    height: 60px; 
+    border-radius: 10px; 
+    margin-right: 15px; 
+    object-fit: contain; 
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.song-details p {
+    max-width: 150px;
+}
+
+/* Estado Minimizado */
+.music-player.minimized {
+    height: 125px !important; /* Altura ajustada para la info */
+    width: 250px !important;
+}
+.music-player.minimized #collapsible-controls {
+    display: none !important;
+}
+.music-player.minimized #info-cancion {
+    margin-bottom: 0 !important;
+}
+/* Botones y Volumen */
+.main-btns {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 15px 0;
+}
+.main-btns i {
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: white;
+    transition: 0.3s;
+}
+.main-btns i:hover { color: var(--amarillo-neon); }
+
+.volume-bar-fixed {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 10px;
+}
+.volume-bar-fixed input {
+    flex: 1;
+    accent-color: var(--amarillo-neon);
+}
+
+#song-list {
+    max-height: 120px;
+    overflow-y: auto;
+    margin-top: 10px;
+}

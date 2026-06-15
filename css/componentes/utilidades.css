@@ -1,0 +1,552 @@
+/* SIDEBAR DE IMÁGENES (CUADRADITOS) */
+.utility-sidebar {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 70px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    gap: 15px;
+    z-index: 1000; /* Bajado para que los popups se abran por encima */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.utility-item {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px; /* Cuadradito redondeado */
+    overflow: hidden;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid transparent;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0.6;
+}
+
+.utility-item:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    border-color: var(--accent-color, #ffea00);
+    box-shadow: 0 0 15px var(--accent-glow, rgba(255, 234, 0, 0.5));
+}
+
+:root {
+    --stem-color: #2e7d32;
+    --seeds-color: #3e2723;
+    --petal-color: #ffea00;
+}
+
+.flower-app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 350px;
+    overflow: hidden;
+}
+
+.soil-vivida {
+    width: 150px;
+    height: 15px;
+    border-radius: 20px;
+    background: var(--seeds-color);
+    z-index: 10;
+}
+
+.stem-vivida {
+    width: 8px;
+    height: 180px;
+    background: var(--stem-color);
+    animation: stem-grow 2s ease-in-out;
+    position: relative;
+}
+
+.leaf-vivida {
+    width: 30px;
+    height: 30px;
+    background: var(--stem-color);
+    border-radius: 100% 0;
+    position: absolute;
+}
+
+.leaf-vivida:nth-child(1) { left: -30px; top: 50%; transform: rotate(-15deg); }
+.leaf-vivida:nth-child(2) { right: -30px; top: 30%; transform: rotate(195deg); }
+
+/* 1. ASEGURAMOS EL CONTENEDOR DE LA FLOR */
+.flower-vivida {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px; /* Tamaño fijo para centrar mejor */
+    height: 200px;
+    transition: 2s;
+    transform: translateY(20px) scale(0);
+}
+
+.flower-vivida.animated {
+    transform: translateY(20px) scale(1);
+}
+
+/* 2. EL CENTRO (Semillas) - Centrado absoluto */
+.seeds-vivida {
+    width: 70px; /* Un poquito más grande para que tape la base de los pétalos */
+    height: 70px;
+    background: var(--seeds-color);
+    border-radius: 50%;
+    position: absolute; /* Cambiado a absoluto */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrado perfecto */
+    z-index: 10;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 0 15px rgba(0,0,0,0.2);
+    background-image: radial-gradient(#534134 2px, transparent 2px);
+    background-size: 8px 8px;
+}
+
+/* 3. LOS PÉTALOS - Ajuste de eje */
+.petal-vivida {
+    position: absolute;
+    top: 50%; /* Salen desde el centro exacto */
+    left: 50%;
+    width: 25px;
+    height: 65px;
+    border-radius: 100% 0 100% 0;
+    background: linear-gradient(135deg, #ffea00 0%, #fbc02d 100%);
+    box-shadow: 0 0 8px rgba(255, 234, 0, 0.3);
+    
+    /* El origen de transformación DEBE ser el centro del eje para que giren bien */
+    transform-origin: center bottom; 
+    opacity: 0;
+    transition: all 1s ease-out;
+}
+
+/* 4. LA ROTACIÓN - El secreto del círculo */
+.petal-vivida:nth-child(n) { 
+    /* El translateY(-100%) los sube para que la 'cola' quede en el centro 
+       y el segundo translateY(-25px) les da el diámetro del anillo */
+    transform: translate(-50%, -100%) rotate(calc(var(--i) * 15deg)) translateY(-20px) rotate(45deg); 
+}
+
+/* 4. Distribución perfecta de los 24 pétalos en círculo */
+.petal-vivida.animated {
+    opacity: 1;
+}
+
+
+/* El loop de CSS para el índice de los 24 pétalos se queda IGUAL que antes */
+.petal-vivida { --i: 1; }
+.petal-vivida:nth-child(1) { --i: 1; } .petal-vivida:nth-child(2) { --i: 2; }
+.petal-vivida:nth-child(3) { --i: 3; } .petal-vivida:nth-child(4) { --i: 4; }
+.petal-vivida:nth-child(5) { --i: 5; } .petal-vivida:nth-child(6) { --i: 6; }
+.petal-vivida:nth-child(7) { --i: 7; } .petal-vivida:nth-child(8) { --i: 8; }
+.petal-vivida:nth-child(9) { --i: 9; } .petal-vivida:nth-child(10) { --i: 10; }
+.petal-vivida:nth-child(11) { --i: 11; } .petal-vivida:nth-child(12) { --i: 12; }
+.petal-vivida:nth-child(13) { --i: 13; } .petal-vivida:nth-child(14) { --i: 14; }
+.petal-vivida:nth-child(15) { --i: 15; } .petal-vivida:nth-child(16) { --i: 16; }
+.petal-vivida:nth-child(17) { --i: 17; } .petal-vivida:nth-child(18) { --i: 18; }
+.petal-vivida:nth-child(19) { --i: 19; } .petal-vivida:nth-child(20) { --i: 20; }
+.petal-vivida:nth-child(21) { --i: 21; } .petal-vivida:nth-child(22) { --i: 22; }
+.petal-vivida:nth-child(23) { --i: 23; } .petal-vivida:nth-child(24) { --i: 24; }
+
+
+/* Estilo Masonry para el Rincón de Suga */
+.suga-gallery {
+    column-count: 3; /* 3 columnas en PC */
+    column-gap: 15px;
+    padding: 10px;
+}
+
+.suga-item {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.suga-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.suga-item img:hover {
+    transform: scale(1.08);
+}
+
+/* El popup con borde neón */
+.suga-popup-custom {
+    border: 2px solid #00ff9d !important; /* Borde amarillo Suga */
+    border-radius: 40px !important;
+}
+
+/* Ajuste para tablets y celulares */
+@media (max-width: 900px) {
+    .suga-gallery, .kirby-gallery { column-count: 2; }
+}
+@media (max-width: 500px) {
+    .suga-gallery, .kirby-gallery { column-count: 1; }
+}
+
+/* ==========================================
+   ESTILOS MENSAJE DE AMOR (SweetAlert)
+   ========================================== */
+.amor-popup {
+    background-color: #1a0b1f !important;
+    /* Colocamos tu imagen como fondo con un filtro oscuro para leer bien el texto */
+    background-image: linear-gradient(rgba(26, 11, 31, 0.7), rgba(26, 11, 31, 0.8)), url('https://i.pinimg.com/originals/46/85/7d/46857d0c63b1639008b3298d8d231c19.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    border: 3px solid #ff4d94 !important;
+    border-radius: 40px !important;
+    box-shadow: 0 0 30px rgba(255, 77, 148, 0.4) !important;
+}
+
+.amor-title {
+    color: #ffb3d9 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 2.2rem !important;
+    text-shadow: 0 0 10px rgba(255, 77, 148, 0.6) !important;
+}
+
+.amor-text {
+    color: #ffffff !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 1.1rem !important;
+    line-height: 1.5 !important;
+}
+
+.amor-button-confirm {
+    background: linear-gradient(90deg, #ff4d94, #e6005c) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 50px !important;
+    padding: 12px 30px !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 700 !important;
+    box-shadow: 0 5px 15px rgba(255, 77, 148, 0.4) !important;
+    transition: 0.3s !important;
+}
+
+.amor-button-confirm:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 5px 25px rgba(255, 77, 148, 0.7) !important;
+}
+
+/* ==========================================
+   ESTILOS MENSAJE ESPECIAL (Sobre rojo)
+   ========================================== */
+.especial-popup {
+    /* Preparado para el fondo: He puesto un degradado oscuro que se mezclará con tu imagen */
+    background: linear-gradient(rgba(10, 10, 20, 0.85), rgba(20, 10, 30, 0.9)), 
+                url('https://i.pinimg.com/736x/b3/af/93/b3af9361793cf98b1f28e4834c5bd13f.jpg') !important; 
+    background-size: cover !important;
+    background-position: center !important;
+    backdrop-filter: blur(10px) !important; /* Difuminado para un toque moderno */
+    border: 2px solid var(--accent-color, #ff1a1a) !important;
+    border-radius: 40px !important;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-low) !important;
+    padding: 40px !important;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.especial-title {
+    color: #ffffff !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 900 !important;
+    font-size: 2.5rem !important;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px var(--accent-glow) !important;
+}
+
+.especial-text {
+    color: #ffffff !important;
+    font-family: 'Rajdhani', sans-serif !important;
+    font-size: 1.4rem !important;
+    line-height: 1.8 !important;
+    max-width: 80%;
+    margin: 0 auto !important;
+}
+
+.especial-button-confirm {
+    background: var(--accent-color, #ff1a1a) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 50px !important;
+    padding: 12px 30px !important;
+    font-weight: 700 !important;
+    transition: 0.3s !important;
+}
+
+.especial-button-confirm:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 5px 25px rgba(255, 26, 26, 0.6) !important;
+}
+
+/* ==========================================
+   GALERÍA RINCÓN DE KIRBY (Masonry)
+   ========================================== */
+.kirby-gallery {
+    column-count: 3;
+    column-gap: 15px;
+    padding: 10px;
+}
+
+.kirby-item {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.kirby-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.kirby-item img:hover {
+    transform: scale(1.08);
+}
+
+/* El popup con borde Kirby (Rosa) */
+.kirby-popup-custom {
+    border: 2px solid #ffb7c5 !important;
+    border-radius: 40px !important;
+}
+
+/* --- POPUP DE LA FLOR (🌻) --- */
+.flower-popup-frame {
+    border: 3px solid #ffea00 !important;
+    border-radius: 50px !important;
+    /* Efecto neón exterior e interior */
+    box-shadow: 0 0 50px rgba(255, 234, 0, 0.4), inset 0 0 25px rgba(255, 234, 0, 0.1) !important;
+    /* Fondo con gradiente radial para que no sea un color plano */
+    background: radial-gradient(circle at center, #1a1a0b 0%, #05050a 100%) !important;
+}
+
+.destellos-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.destellos-wrapper span {
+    position: absolute;
+    display: inline-block;
+    animation: floating-sparkle 3s infinite ease-in-out;
+}
+
+@keyframes floating-sparkle {
+    0%, 100% { transform: translateY(0) scale(0.8); opacity: 0; }
+    50% { transform: translateY(-30px) scale(1.2); opacity: 1; }
+}
+
+/* --- TRANSICIÓN GLOBAL PARA TEMAS --- */
+body, .main-content, .header-content-v2, .luxury-header, .utility-sidebar, .aurora-bg, header, main {
+    transition: background 0.8s ease, border-color 0.8s ease, box-shadow 0.8s ease !important;
+}
+
+/* --- ESTILO VÍDEO DE FONDO (Tipo Wallpaper Engine) --- */
+.wallpaper-engine-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; /* Hace que el video cubra toda la pantalla sin deformarse */
+    z-index: -1;      /* Lo manda detrás de todo el contenido */
+    pointer-events: none; /* Para que no interfiera con los clics en la página */
+    transition: opacity 0.6s ease; /* Transición suave para el cambio de video */
+}
+
+/* ==========================================
+   SISTEMA DE TEMAS (Fondos y Decoraciones)
+   ========================================== */
+
+/* TEMA: ESPACIAL 🚀 */
+body.theme-space {
+    --accent-color: #0096ff;
+    --accent-glow: rgba(0, 150, 255, 0.5);
+    --accent-low: rgba(0, 150, 255, 0.1);
+    background-image: url('https://media.giphy.com/media/26BRQxOLO1cTrerMk/giphy.gif'); /* Fallback si falla el video */
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    background-color: #05050a;
+}
+body.theme-space .utility-sidebar {
+    background: rgba(10, 20, 60, 0.6) !important;
+    border-color: rgba(0, 150, 255, 0.6) !important;
+    box-shadow: 0 0 20px rgba(0, 150, 255, 0.3);
+}
+body.theme-space::before { /* Cometa Animado */
+    content: '☄️';
+    position: fixed;
+    top: 15%; right: 10%;
+    font-size: 50px;
+    animation: flotarDecoracion 4s ease-in-out infinite;
+    z-index: -1;
+}
+/* Borde y fondo para Header v2 y Main */
+body.theme-space .main-content, body.theme-space .header-content-v2 {
+    border: 2px solid rgba(0, 150, 255, 0.6) !important;
+    background-color: rgba(10, 20, 40, 0.7) !important;
+    background-image: none !important;
+    box-shadow: 0 0 30px rgba(0, 150, 255, 0.2) !important;
+}
+
+/* Ocultamos el fondo de Aurora para que se vea el GIF */
+body.theme-space .aurora-bg, 
+body.theme-spiderman .aurora-bg, 
+body.theme-forest .aurora-bg {
+    display: none !important;
+}
+
+/* TEMA: SPIDER-MAN 🕸️ */
+body.theme-spiderman {
+    --accent-color: #ff0000;
+    --accent-glow: rgba(255, 0, 0, 0.5);
+    --accent-low: rgba(255, 0, 0, 0.1);
+    /* Link directo de Tenor para Spiderman Freedive */
+    background-image: url('https://media.tenor.com/S5XpE7C7Y08AAAAC/spiderman-freedive.gif'); 
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    background-color: #1a0505;
+}
+body.theme-spiderman .utility-sidebar {
+    background: rgba(60, 10, 10, 0.6) !important;
+    border-color: rgba(255, 0, 0, 0.6) !important;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+}
+body.theme-spiderman::before { /* Arañita colgando */
+    content: '🕷️';
+    position: fixed;
+    top: -5px; right: 15%;
+    font-size: 45px;
+    animation: colgarArana 5s ease-in-out infinite;
+    z-index: -1;
+    border-right: 2px solid rgba(255,255,255,0.4);
+    padding-right: 20px;
+    height: 100px;
+}
+/* Borde y Brillo para Contenedores */
+body.theme-spiderman :is(.main-content, .header-content-v2) {
+    border: 2px solid rgba(255, 0, 0, 0.6) !important;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.2) !important;
+}
+/* Fondo transparente para Luxury Header y traslúcido para el resto */
+body.theme-spiderman :is(.main-content, .header-content-v2) { background: rgba(30, 5, 5, 0.8) !important; }
+body.theme-spiderman .luxury-header { 
+    background: transparent !important; 
+    background-image: none !important; 
+}
+
+/* TEMA: BOSQUE MÁGICO 🌲 */
+body.theme-forest {
+    --accent-color: #00ff64;
+    --accent-glow: rgba(0, 255, 100, 0.5);
+    --accent-low: rgba(0, 255, 100, 0.1);
+    background-image: url('https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2Z4bmN6bmZ6ZzZ6ZzZ6ZzZ6ZzZ6ZzZ6ZzZ6ZzZ6ZzZ6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/10vX68YkIDGZ6U/giphy.gif') !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    background-color: #051a05 !important;
+}
+body.theme-forest .utility-sidebar {
+    background: rgba(10, 40, 20, 0.6) !important;
+    border-color: rgba(0, 255, 100, 0.6) !important;
+    box-shadow: 0 0 20px rgba(0, 255, 100, 0.3);
+}
+
+/* Borde y fondo para Header v2 y Main (Blindado) */
+body.theme-forest .main-content, 
+body.theme-forest .header-content-v2 {
+    border: 2px solid rgba(0, 255, 100, 0.6) !important;
+    background: rgba(5, 20, 10, 0.8) !important;
+    background-image: none !important;
+    box-shadow: 0 0 30px rgba(0, 255, 100, 0.2) !important;
+}
+
+/* --- ANIMACIONES DE LAS DECORACIONES --- */
+@keyframes flotarDecoracion {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+}
+@keyframes volarDecoracion {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(40px, -50px) scale(1.1); }
+}
+@keyframes colgarArana {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(30px); }
+}
+
+/* ==========================================
+   SELECTOR DE TEMAS (Dock Moderno)
+   ========================================== */
+.theme-dock-vivida {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    display: flex;
+    gap: 12px;
+    background: rgba(10, 10, 20, 0.5);
+    backdrop-filter: blur(15px);
+    padding: 10px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    z-index: 1000; /* Bajado para que no tape la X de las ventanas grandes */
+}
+
+.theme-btn-vivida {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: #fff;
+}
+
+.theme-btn-vivida:hover {
+    transform: scale(1.2) translateY(-4px);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--accent-color, #ffea00);
+    box-shadow: 0 0 15px var(--accent-glow, rgba(255, 234, 0, 0.5));
+}
+
+.theme-btn-vivida.active {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--accent-color, #ffea00);
+    box-shadow: 0 0 20px var(--accent-glow, rgba(255, 234, 0, 0.4));
+    transform: scale(1.1);
+}

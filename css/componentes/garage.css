@@ -1,0 +1,159 @@
+/* 1. FONDO OSCURO FULLSCREEN */
+div.swal2-popup.garage-popup-immersive {
+    background: #0a0a0f !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    padding: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+/* 2. CONTENEDOR DE SCROLL HORIZONTAL (Para pasar entre miembros) */
+.garage-scroll-wrapper {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 30px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 40px !important;
+    width: 100% !important;
+    height: 90vh !important;
+    background: transparent !important;
+    scrollbar-width: thin;
+    scrollbar-color: #8a2be2 transparent;
+}
+
+/* 3. LA TARJETA (Con scroll interno para ver varios autos) */
+.member-car-card {
+    min-width: 400px !important;
+    max-width: 400px !important;
+    height: 100% !important;
+    flex-shrink: 0 !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(138, 43, 226, 0.4) !important;
+    border-radius: 35px !important;
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    
+    /* ESTO ES LO QUE HACE QUE SE VAYA EL SCROLLBAR */
+    overflow-y: scroll !important; /* Mantenemos el scroll funcional... */
+    scrollbar-width: none !important; /* ...pero escondemos la barrita en Firefox */
+}
+
+
+/* 4. NOMBRE FLOTANTE (Fijo arriba de la tarjeta) */
+.member-name-overlay {
+    position: sticky !important; /* Se queda arriba mientras bajás */
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 20px !important;
+    font-size: 2.2rem !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    z-index: 10 !important;
+    background: linear-gradient(to bottom, rgba(10,10,15,0.8), transparent) !important;
+    text-shadow: 2px 2px 15px rgba(0,0,0,0.9) !important;
+    pointer-events: none !important;
+}
+
+/* 5. LAS IMÁGENES */
+/* css/componentes/garage.css */
+
+.img-integrante {
+    width: 100% !important;
+    height: 300px !important;
+    object-fit: cover !important;
+    flex-shrink: 0 !important;
+    
+    /* Mantenemos la posición para verle la cara */
+    object-position: center 30% !important; 
+    
+    /* NUEVO EFECTO DE DESVANECIDO (MÁSCARA RECALCULADA) */
+    /* Explicación: Sólido hasta el 60% (cubre la cara), 
+       luego se difumina suavemente hasta el 95% (se mezcla con el auto) */
+    mask-image: linear-gradient(
+        to bottom, 
+        black 60%,         /* Hasta acá se ve perfecto (sin difuminar) */
+        rgba(0,0,0,0.5) 85%, /* Empieza a transparentarse */
+        transparent 95%     /* Al llegar al auto ya es invisible */
+    ) !important;
+
+    -webkit-mask-image: linear-gradient(
+        to bottom, 
+        black 60%, 
+        rgba(0,0,0,0.5) 85%, 
+        transparent 95%
+    ) !important;
+}
+
+.member-car-card::-webkit-scrollbar {
+    display: none !important;
+}
+
+/* 2. ELIMINAMOS EL BOTÓN AMARILLO (Le sacamos todo el estilo y lo hacemos invisible) */
+.price-tag-v2 {
+    display: none !important; /* <- ESTO HACE QUE EL BOTÓN DESAPAREZCA */
+}
+
+.img-auto-garage {
+    width: 85% !important;
+    height: 180px !important;
+    object-fit: cover !important;
+    border-radius: 20px !important;
+    margin: -60px auto 15px auto !important;
+    border: 3px solid #0a0a0f !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.7) !important;
+    background-color: #111; /* Por si la imagen tarda en cargar */
+}
+
+/* 6. TEXTOS Y SPECS */
+.car-details-body {
+    padding: 0 10px 20px 10px !important;
+}
+
+.car-model-name {
+    color: #ffea00 !important;
+    font-weight: 800 !important;
+    font-size: 1.4rem !important;
+    text-align: center !important;
+    margin-bottom: 15px !important;
+}
+
+.mini-specs {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    padding: 0 15px !important;
+}
+
+.spec-item-v2 {
+    background: rgba(255,255,255,0.05) !important;
+    padding: 10px !important;
+    border-radius: 12px !important;
+    color: #d1adff !important;
+    font-size: 0.8rem !important;
+    text-align: center !important;
+}
+
+.spec-item-v2 b {
+    color: #fff !important;
+    display: block !important;
+    font-size: 0.7rem !important;
+    text-transform: uppercase !important;
+}
+
+.price-tag-v2 {
+    background: #ffea00 !important;
+    color: #000 !important;
+    padding: 12px !important;
+    border-radius: 50px !important;
+    margin: 20px 30px !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+    box-shadow: 0 5px 15px rgba(255, 234, 0, 0.3) !important;
+}
+
